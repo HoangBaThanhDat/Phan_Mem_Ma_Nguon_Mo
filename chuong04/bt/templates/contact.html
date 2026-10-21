@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Liên hệ{% endblock %}
+
+{% block content %}
+<!-- Nội dung ngoài block content sẽ không hiển thị theo quy tắc Jinja2 -->
+<h1>Tiêu đề ngoài block nên không hiển thị</h1>
+
+<div class="row g-4 justify-content-center align-items-center">
+    <div class="col-md-8">
+        <div class="card card-corporate p-4 bg-white shadow-sm">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex p-3 bg-success bg-opacity-10 text-success rounded-circle mb-2">
+                    <i class="fa-solid fa-location-dot fs-3"></i>
+                </div>
+                <h3 class="fw-bold" style="color: #1b3b2b;">Thông Tin Liên Hệ</h3>
+                <p class="text-muted small">Chúng tôi luôn sẵn sàng lắng nghe và phục vụ quý khách</p>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded-3 border">
+                        <p class="text-muted small mb-1"><i class="fa-solid fa-building text-success me-1"></i> Tên cửa hàng</p>
+                        <h6 class="fw-bold mb-0 text-dark">{{ shop.name }}</h6>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded-3 border">
+                        <p class="text-muted small mb-1"><i class="fa-solid fa-phone text-success me-1"></i> Hotline hỗ trợ</p>
+                        <h6 class="fw-bold mb-0 text-success">{{ shop.phone }}</h6>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="p-3 bg-light rounded-3 border">
+                        <p class="text-muted small mb-1"><i class="fa-solid fa-map-location-dot text-success me-1"></i> Địa chỉ trụ sở</p>
+                        <h6 class="fw-bold mb-0 text-dark">{{ shop.address }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

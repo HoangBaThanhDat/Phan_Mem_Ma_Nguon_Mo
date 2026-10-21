@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Trang chủ{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .hero-banner-container {
+        position: relative;
+        border-radius: 0.85rem;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(27, 59, 43, 0.18);
+    }
+    .banner-slide-img {
+        height: 250px;
+        object-fit: cover;
+        width: 100%;
+        filter: brightness(0.85) saturate(1.1);
+    }
+    .banner-overlay-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background: linear-gradient(90deg, rgba(27, 59, 43, 0.85) 0%, rgba(27, 59, 43, 0.3) 100%);
+        display: flex;
+        align-items: center;
+        padding: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- BANNER CAROUSEL 3S KÈM GIỜ MỞ CỬA -->
+<div class="hero-banner-container mb-4">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=1200&auto=format&fit=crop" class="banner-slide-img" alt="Cà phê">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=1200&auto=format&fit=crop" class="banner-slide-img" alt="Trà sen">
+            </div>
+        </div>
+    </div>
+
+    <div class="banner-overlay-content">
+        <div class="text-white w-100 d-flex justify-content-between align-items-center">
+            <div>
+                <span class="badge bg-warning text-dark mb-2 px-2.5 py-1 fw-semibold">
+                    <i class="fa-solid fa-clock me-1"></i>Giờ hoạt động: {{ shop.open }}:00 - {{ shop.close }}:00
+                </span>
+                <h1 class="display-6 fw-bold mb-2">Chào mừng đến với {{ shop.name }}</h1>
+                <p class="lead mb-3 fs-6 opacity-90">
+                    <i class="fa-solid fa-location-dot me-1"></i>{{ shop.address }}
+                </p>
+            </div>
+            <div>
+                {% if is_open %}
+                    <span class="badge bg-success fs-6 px-3 py-2 shadow-sm"><i class="fa-solid fa-door-open me-1"></i>ĐANG MỞ CỬA</span>
+                {% else %}
+                    <span class="badge bg-danger fs-6 px-3 py-2 shadow-sm"><i class="fa-solid fa-door-closed me-1"></i>ĐÃ ĐÓNG CỬA</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

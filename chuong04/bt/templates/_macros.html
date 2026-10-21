@@ -1,0 +1,65 @@
+{% macro item_card(item) %}
+<div class="col-md-4 col-sm-6">
+    <div class="card menu-item-card h-100 p-3 bg-white rounded-3 shadow-sm">
+        <div class="card-body p-2 d-flex flex-column justify-content-between">
+            <div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="badge bg-success bg-opacity-10 text-success fw-semibold px-2 py-1" style="font-size: 0.75rem;">Mã món: #{{ item.id }}</span>
+                    {% if item.available %}
+                        <span class="badge bg-success" style="font-size: 0.7rem;">Còn hàng</span>
+                    {% else %}
+                        <span class="badge bg-danger" style="font-size: 0.7rem;">Hết hàng</span>
+                    {% endif %}
+                </div>
+                <h5 class="fw-bold text-dark mb-2" style="font-size: 1rem;">{{ item.name | title_vi }}</h5>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2 border-top pt-2">
+                <span class="text-danger fw-bold fs-6">{{ item.price | vnd }}</span>
+                <button class="btn btn-sm btn-outline-success rounded-circle"><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro pagination(page, pages, endpoint) %}
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <!-- Nút Trước (Previous) -->
+        {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link text-success" href="/{{ endpoint }}?page={{ page - 1 }}">&laquo; Trước</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo; Trước</span>
+            </li>
+        {% endif %}
+
+        <!-- Các số trang -->
+        {% for p in range(1, pages + 1) %}
+            {% if p == page %}
+                <!-- Trang hiện tại: In đậm, không phải là liên kết -->
+                <li class="page-item active">
+                    <span class="page-link bg-success border-success text-white fw-bold">{{ p }}</span>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link text-success" href="/{{ endpoint }}?page={{ p }}">{{ p }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Nút Sau (Next) -->
+        {% if page < pages %}
+            <li class="page-item">
+                <a class="page-link text-success" href="/{{ endpoint }}?page={{ page + 1 }}">Sau &raquo;</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Sau &raquo;</span>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{%- endmacro %}
